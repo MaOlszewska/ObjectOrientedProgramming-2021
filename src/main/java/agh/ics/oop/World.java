@@ -7,6 +7,7 @@ public class World {
     public static void main(String[] args){
         out.println("Start");
         ArrayList<Direction>List = new ArrayList<>();
+        // Zmiana na wartości enum
         for(int i = 0; i < args.length; i++) {
             switch (args[i]){
                 case "f":
