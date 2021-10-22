@@ -4,29 +4,17 @@ import java.util.ArrayList;
 import static java.lang.System.out;
 
 public class World {
+
     public static void main(String[] args){
-        out.println("Start");
-        ArrayList<Direction>List = new ArrayList<>();
-        // Zmiana na wartości enum
-        for(int i = 0; i < args.length; i++) {
-            switch (args[i]){
-                case "f":
-                    List.add(Direction.FORWARD);
-                    break;
-                case "b":
-                    List.add(Direction.BACKWARD);
-                    break;
-                case "r":
-                    List.add(Direction.RIGHT);
-                    break;
-                case "l":
-                    List.add(Direction.LEFT);
-                    break;
-            }
-        }
-        run(List);
-        out.println("Koniec");
+    Vector2d position1 = new Vector2d(1,2);
+    out.println(position1);
+    Vector2d position2 = new Vector2d(-2,1);
+    out.println(position2);
+    out.println(position1.add(position2));
+    MapDirection s = MapDirection.SOUTH;
+    out.println(s.toUnitVector());
     }
+
     static void run(ArrayList<Direction> arguments){
         for(Direction argument : arguments) {
             switch (argument){
