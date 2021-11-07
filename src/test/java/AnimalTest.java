@@ -1,7 +1,5 @@
 package agh.ics.oop;
 import org.junit.jupiter.api.Test;
-
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AnimalTest {
@@ -10,7 +8,7 @@ public class AnimalTest {
     public void orientationTest(){
         Animal a = new Animal();
         String[] moves = new String[]{"l","forward","left","backward"};
-        OptionParser p = new OptionParser();
+        OptionsParser p = new OptionsParser();
         for(MoveDirection move : p.parse(moves)){a.move(move);}
 
         assertEquals(a.getOrientation(), MapDirection.SOUTH );
@@ -25,7 +23,7 @@ public class AnimalTest {
     public void positionTest(){
         Animal a = new Animal();
         String[] moves = new String[]{"l", "f", "left", "b"};
-        OptionParser p = new OptionParser();
+        OptionsParser p = new OptionsParser();
         for(MoveDirection move : p.parse(moves)){a.move(move);}
 
         assertEquals(a.getPosition(), new Vector2d(1,3));
@@ -40,7 +38,7 @@ public class AnimalTest {
     public void mapTest(){
         Animal a = new Animal();
         String[] moves = new String[]{"f", "f", "f", "f", "f", "f", "f"};
-        OptionParser p = new OptionParser();
+        OptionsParser p = new OptionsParser();
         for(MoveDirection move : p.parse(moves)){a.move(move);}
 
         assertEquals(a.getPosition(), new Vector2d(2,4));
@@ -58,7 +56,7 @@ public class AnimalTest {
     public void interpretationTest(){
         Animal a = new Animal();
         String [] moves = new String[]{"f", "chomik", "right", "Kot", "left", "l", "pies", "backward", "Rybki"};
-        OptionParser p = new OptionParser();
+        OptionsParser p = new OptionsParser();
         for(MoveDirection move : p.parse(moves)){a.move(move);}
 
         assertEquals(a.getPosition(),new Vector2d(3,3));

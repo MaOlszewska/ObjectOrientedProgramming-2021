@@ -1,16 +1,34 @@
 package agh.ics.oop;
 
-public class Animal {
+import java.util.Map;
+
+public class Animal  {
     private Vector2d position;
     private MapDirection orientation;
+    private IWorldMap map;
+
 
     public Animal(){
-        this.position = new Vector2d(2,2);
         this.orientation = MapDirection.NORTH;
+        this.position = new Vector2d(2, 2);
+    }
+    public Animal(IWorldMap map){
+        this();
+        this.map = map;
+    }
+
+    public Animal(IWorldMap map, Vector2d initialPosition){
+        this(map);
+        this.position = initialPosition;
     }
 
     public String toString(){
-        return "Position: " + this.position + " Orientation: " + this.orientation;
+        return switch (this.orientation){
+            case NORTH -> "^";
+            case EAST -> ">";
+            case SOUTH -> "v";
+            case WEST ->  "<";
+        };
     }
 
     public MapDirection getOrientation(){
@@ -18,6 +36,7 @@ public class Animal {
     }
 
     public Vector2d getPosition() { return  this.position; }
+
 
     public void move(MoveDirection direction){
         switch(direction){
@@ -30,16 +49,16 @@ public class Animal {
                 break;
 
             case FORWARD:
-                if(this.position.add(this.orientation.toUnitVector()).precedes(new Vector2d(4,4))
-                        && this.position.add(this.orientation.toUnitVector()).follows(new Vector2d(0,0))){
-                    this.position = this.position.add(this.orientation.toUnitVector());
+                Vector2d newposition = this.position.add(this.orientation.toUnitVector());
+                if(this.map.canMoveTo(newposition)){
+                    this.position = newposition;
                 }
                 break;
 
             case BACKWARD:
-                if(this.position.subtract(this.orientation.toUnitVector()).precedes(new Vector2d(4,4))
-                        && this.position.subtract(this.orientation.toUnitVector()).follows(new Vector2d(0,0))){
-                    this.position = this.position.subtract(this.orientation.toUnitVector());
+                Vector2d newposition1 = this.position.add(this.orientation.toUnitVector());
+                if(this.map.canMoveTo(newposition1)){
+                    this.position = newposition1;
                 }
                 break;
         }

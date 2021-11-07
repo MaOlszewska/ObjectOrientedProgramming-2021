@@ -1,23 +1,16 @@
 package agh.ics.oop;
-import java.util.LinkedList;
 
-import static java.lang.System.out;
+import java.util.ArrayList;
 
 public class World {
 
-    public static void main(String[] args){
-
-        Animal animal = new Animal();
-        out.println(animal.toString());
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.FORWARD);
-        animal.move(MoveDirection.FORWARD);
-        animal.move(MoveDirection.FORWARD);
-        out.println(animal.toString());
-
-        OptionParser p = new OptionParser();
-        String[] moves = new String[]{"l","forward","kot","left","backward"};
-        for(MoveDirection m : p.parse(moves)){ animal.move(m);}
-        out.println(animal.toString());
+    public static void main(String[] args) {
+        MoveDirection[] directions = new OptionsParser().parse(args);
+        IWorldMap map = new RectangularMap(10, 5);
+        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+        IEngine engine = new SimulationEngine(directions, map, positions);
+        System.out.println(map);
+        engine.run();
+        System.out.println(map);
     }
 }
