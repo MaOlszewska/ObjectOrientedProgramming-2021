@@ -4,16 +4,12 @@ import java.util.ArrayList;
 
 
 public class RectangularMap implements IWorldMap {
-    private final int height;
-    private final int width;
-    private ArrayList<Animal> animals = new ArrayList<>();
-    private Vector2d leftcorner;
-    private Vector2d rightcorner;
-    private  MapVisualizer mapVisualizer;
+    private final ArrayList<Animal> animals = new ArrayList<>();
+    private final Vector2d leftcorner;
+    private final Vector2d rightcorner;
+    private final MapVisualizer mapVisualizer;
 
     public RectangularMap (int height, int width){
-        this.height = height;
-        this.width = width;
         this.rightcorner = new Vector2d( width - 1,height -1);
         this.leftcorner = new Vector2d(0,0);
         this.mapVisualizer = new MapVisualizer(this);

@@ -29,23 +29,19 @@ class Vector2d {
     }
 
     public Vector2d upperRight(Vector2d other) {
-        Vector2d object = new Vector2d(Math.max(other.x, this.x), Math.max(other.y, this.y));
-        return object;
+        return new Vector2d(Math.max(other.x, this.x), Math.max(other.y, this.y));
     }
 
     public Vector2d loweLeft(Vector2d other) {
-        Vector2d object = new Vector2d(Math.min(other.x, this.x), Math.min(other.y, this.y));
-        return object;
+        return new Vector2d(Math.min(other.x, this.x), Math.min(other.y, this.y));
     }
 
     public Vector2d add(Vector2d other) {
-        Vector2d object = new Vector2d(this.x + other.x, this.y + other.y);
-        return object;
+        return new Vector2d(this.x + other.x, this.y + other.y);
     }
 
     public Vector2d subtract(Vector2d other) {
-        Vector2d object = new Vector2d(this.x - other.x, this.y - other.y);
-        return object;
+        return new Vector2d(this.x - other.x, this.y - other.y);
     }
 
     public boolean equals(Object o) {
@@ -56,7 +52,6 @@ class Vector2d {
     }
 
     public Vector2d opposite() {
-        Vector2d object = new Vector2d((-1) * this.x, (-1) * this.y);
-        return object;
+        return new Vector2d((-1) * this.x, (-1) * this.y);
     }
 }

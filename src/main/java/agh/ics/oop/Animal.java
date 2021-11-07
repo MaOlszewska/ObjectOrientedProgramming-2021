@@ -39,28 +39,21 @@ public class Animal  {
 
 
     public void move(MoveDirection direction){
-        switch(direction){
-            case RIGHT:
-                this.orientation = this.orientation.next();
-                break;
-
-            case LEFT:
-                this.orientation = this.orientation.previous();
-                break;
-
-            case FORWARD:
+        switch (direction) {
+            case RIGHT -> this.orientation = this.orientation.next();
+            case LEFT -> this.orientation = this.orientation.previous();
+            case FORWARD -> {
                 Vector2d newposition = this.position.add(this.orientation.toUnitVector());
-                if(this.map.canMoveTo(newposition)){
+                if (this.map.canMoveTo(newposition)) {
                     this.position = newposition;
                 }
-                break;
-
-            case BACKWARD:
+            }
+            case BACKWARD -> {
                 Vector2d newposition1 = this.position.add(this.orientation.toUnitVector());
-                if(this.map.canMoveTo(newposition1)){
+                if (this.map.canMoveTo(newposition1)) {
                     this.position = newposition1;
                 }
-                break;
+            }
         }
     }
 }
