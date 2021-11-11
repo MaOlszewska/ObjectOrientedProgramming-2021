@@ -10,7 +10,7 @@ public class SimulationEngine implements IEngine{
     public SimulationEngine(MoveDirection[] directions, IWorldMap map, Vector2d[] positions){
         this.directions = directions;
         this.map = map;
-        List<Animal> animals = new ArrayList<>();
+        ArrayList<Animal> animals = new ArrayList<>();
 
         // dodaje zwierzaki do mapy
         for(Vector2d position : positions){
@@ -24,14 +24,13 @@ public class SimulationEngine implements IEngine{
     @Override
     public void run() {
         RectangularMap map = (RectangularMap) this.map;
-        List<Animal> animals = map.getAnimals();
-        int len = animals.size();
+        ArrayList<Animal> animals = map.getAnimals();
+        int l = animals.size();
         int i = 0;
 
-
         for (MoveDirection direction: this.directions) {
-            animals.get(i%len).move(direction);
-            i++;
+            animals.get(i % l).move(direction);
+            i ++;
 
         }
     }

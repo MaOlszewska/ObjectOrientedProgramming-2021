@@ -1,5 +1,4 @@
 package agh.ics.oop;
-
 import java.util.Map;
 
 public class Animal  {
@@ -46,6 +45,7 @@ public class Animal  {
                 Vector2d newposition = this.position.add(this.orientation.toUnitVector());
                 if (this.map.canMoveTo(newposition)) {
                     this.position = newposition;
+
                 }
             }
             case BACKWARD -> {
