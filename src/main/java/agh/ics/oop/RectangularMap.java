@@ -22,6 +22,11 @@ public class RectangularMap implements IWorldMap {
 
 
     @Override
+    public void run(MoveDirection[] directions) {
+
+    }
+
+    @Override
     public boolean canMoveTo(Vector2d position) {
         // sprawdzam czy pozycja miesci sie na planszy i czy nie jest zajęta
         return position.follows(this.lowerLeft) && position.precedes(this.upperRight) && !isOccupied(position);

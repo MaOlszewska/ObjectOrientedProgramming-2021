@@ -5,11 +5,12 @@ public class World {
 
     public static void main(String[] args) {
         MoveDirection[] directions = new OptionsParser().parse(args);
-        IWorldMap map = new RectangularMap(10, 5);
-        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4), new Vector2d(9,8) };
-        IEngine engine = new SimulationEngine(directions, map, positions);
+        IWorldMap map = new GrassField(10);
+        map.place(new Animal(map,new Vector2d(2,2)));
+        map.place(new Animal(map,new Vector2d(3,4)));
+        map.place(new Animal(map,new Vector2d(5,2)));
         System.out.println(map);
-        engine.run();
+        map.run(directions);
         System.out.println(map);
     }
 }
