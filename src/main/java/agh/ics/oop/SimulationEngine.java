@@ -28,9 +28,11 @@ public class SimulationEngine implements IEngine{
     public void run() {
         int l = animals.size();
         int i = 0;
+
         for (MoveDirection direction: this.directions) {
             animals.get(i % l).move(direction);
             i ++;
+
         }
     }
 }
