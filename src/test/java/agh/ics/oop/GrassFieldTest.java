@@ -60,19 +60,19 @@ public class GrassFieldTest {
 
     @Test
     public void testRun(){
+        ArrayList<Animal> animals;
         String[] moves = new String[]{"f",  "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
         MoveDirection[] directions = new OptionsParser().parse(moves);
+        Vector2d[] positions = {dog.getPosition(), worm.getPosition()};
+        IEngine engine = new SimulationEngine(directions, map, positions);
 
-        map.place(rabbit);
-        map.place(worm);
-        map.run(directions);
+        engine.run();
 
-        assertEquals(rabbit.getPosition(),new Vector2d(3,-1));
-        assertEquals(worm.getPosition(), new Vector2d(2,9));
-        assertEquals(rabbit.getOrientation(),MapDirection.SOUTH);
-        assertEquals(worm.getOrientation(), MapDirection.NORTH);
-
-
+        animals = ((GrassField) map).getAnimal();
+        assertEquals(animals.get(0).getPosition(), new Vector2d(3,-1));
+        assertEquals(animals.get(1).getPosition(), new Vector2d(2,9));
+        assertEquals(animals.get(0).getOrientation(),MapDirection.SOUTH);
+        assertEquals(animals.get(1).getOrientation(), MapDirection.NORTH);
 
     }
 }

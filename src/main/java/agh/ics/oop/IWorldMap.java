@@ -9,12 +9,6 @@ package agh.ics.oop;
  */
 public interface IWorldMap {
     /**
-     * Move the animal on the map
-     * @param directions
-     *              array of move directions
-     */
-    void run(MoveDirection[] directions);
-    /**
      * Indicate if any object can move to the given position.
      *
      * @param position

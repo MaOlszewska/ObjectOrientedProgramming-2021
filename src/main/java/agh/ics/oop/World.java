@@ -6,11 +6,11 @@ public class World {
     public static void main(String[] args) {
         MoveDirection[] directions = new OptionsParser().parse(args);
         IWorldMap map = new GrassField(10);
-        map.place(new Animal(map,new Vector2d(2,2)));
-        map.place(new Animal(map,new Vector2d(3,4)));
-        map.place(new Animal(map,new Vector2d(5,2)));
+        //IWorldMap map = new RectangularMap(10,10);
+        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+        IEngine engine = new SimulationEngine(directions, map, positions);
         System.out.println(map);
-        map.run(directions);
+        engine.run();
         System.out.println(map);
     }
 }

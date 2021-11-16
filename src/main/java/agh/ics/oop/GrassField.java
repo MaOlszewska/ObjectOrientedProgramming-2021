@@ -4,12 +4,10 @@ import org.w3c.dom.css.Rect;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
-public class GrassField implements IWorldMap{
+public class GrassField extends AbstractWorldMap{
 
     private final int fieldNumber;
-    private final ArrayList<Animal> animals;
     private final ArrayList<Grass> grasses;
-    private final MapVisualizer mapVisualizer;
 
     public GrassField(int fieldNumber){
         this.fieldNumber = fieldNumber;
@@ -19,11 +17,9 @@ public class GrassField implements IWorldMap{
         placeGrass();
     }
 
-
-    public ArrayList<Animal> getAnimals() {
+    public ArrayList<Animal> getAnimal(){
         return this.animals;
     }
-
 
     private void placeGrass(){
         Random random = new Random();
@@ -34,21 +30,10 @@ public class GrassField implements IWorldMap{
             x = random.nextInt((int)Math.sqrt(this.fieldNumber * 10));
             y = random.nextInt((int)Math.sqrt(this.fieldNumber * 10));
             }
+            // instanceof -sprawdzam czy zwracany obiekt z danego pola jest trawą
             while(isOccupied(new Vector2d(x,y)) && (objectAt(new Vector2d(x,y)) instanceof Grass) ); // pozniej sprawdzany warunek, czyli wykona sie przynamnije raz
+
             this.grasses.add(new Grass(new Vector2d(x,y))); // dodaje kępke do trawnika
-        }
-    }
-
-
-    @Override
-    public void run(MoveDirection[] directions) {
-        ArrayList<Animal> animals = this.animals;
-        int l = animals.size();
-        int i = 0;
-
-        for (MoveDirection direction : directions) {
-            animals.get(i % l).move(direction);
-            i++;
         }
     }
 
@@ -57,14 +42,6 @@ public class GrassField implements IWorldMap{
     public boolean canMoveTo(Vector2d position) {
         // aby można było się tam ruszyć musi być puste pole lub być kępka trawy
         return  !isOccupied(position) || objectAt(position) instanceof Grass ;
-    }
-
-
-    @Override
-    public boolean place(Animal animal) {
-        if(!canMoveTo(animal.getPosition())) return false;
-        animals.add(animal);
-        return true;
     }
 
 
@@ -84,46 +61,34 @@ public class GrassField implements IWorldMap{
     }
 
 
-    @Override
-    public boolean isOccupied(Vector2d position) {
-        for(Animal animal : animals){
-            if(animal.getPosition().equals(position)){
-                return true;
-            }
+    public Vector2d getLeftCorner(){
+        Vector2d f = grasses.get(0).getPosition();
+        Vector2d s = grasses.get(1).getPosition();
+        Vector2d leftCorner = f.loweLeft(s);
+
+        for (int i = 2; i < grasses.size(); i++){
+            leftCorner = leftCorner.loweLeft(grasses.get(i).getPosition());
         }
 
-        for(Grass grass : grasses){
-            if(grass.getPosition().equals(position)){
-                return true;
-            }
+        for (Animal animal : animals){
+            leftCorner = leftCorner.loweLeft(animal.getPosition());
         }
-        return false;
+        return leftCorner;
     }
 
 
-    public String toString(){
-        int maxX = Integer.MIN_VALUE;
-        int maxY = Integer.MIN_VALUE;
-        int minX = Integer.MAX_VALUE;
-        int minY = Integer.MAX_VALUE;
+    public Vector2d getRightCorner(){
+        Vector2d f = grasses.get(0).getPosition();
+        Vector2d s = grasses.get(1).getPosition();
+        Vector2d rightCorner = f.upperRight(s);
 
-
-        for(Animal animal :animals){
-            if(animal.getPosition().x > maxX) maxX = animal.getPosition().x;
-            else if(animal.getPosition().x < minX) minX = animal.getPosition().x;
-            if(animal.getPosition().y > maxY) maxY = animal.getPosition().y;
-            else if(animal.getPosition().y < minY) minY = animal.getPosition().y;
+        for (int i = 2; i < grasses.size(); i++){
+            rightCorner = rightCorner.upperRight(grasses.get(i).getPosition());
         }
 
-        for(Grass grass :grasses){
-            if(grass.getPosition().x > maxX) maxX = grass.getPosition().x;
-            else if(grass.getPosition().x < minX) minX = grass.getPosition().x;
-            if(grass.getPosition().y > maxY) maxY = grass.getPosition().y;
-            else if(grass.getPosition().y < minY) minY = grass.getPosition().y;
-
+        for (Animal animal : animals){
+            rightCorner = rightCorner.upperRight(animal.getPosition());
         }
-
-        return mapVisualizer.draw(new Vector2d(minX,minY), new Vector2d(maxX, maxY));
-
+        return rightCorner;
     }
 }

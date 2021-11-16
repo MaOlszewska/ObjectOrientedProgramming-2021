@@ -17,7 +17,7 @@ public class SimulationEngine implements IEngine{
 
         // dodaje zwierzaki do mapy
         for(Vector2d position : this.positions){
-            Animal newAnimal = new Animal(this.map,position);
+            Animal newAnimal = new Animal(this.map, position);
             if (this.map.place(newAnimal)) {
                 animals.add(newAnimal);
             }
@@ -32,7 +32,6 @@ public class SimulationEngine implements IEngine{
         for (MoveDirection direction: this.directions) {
             animals.get(i % l).move(direction);
             i ++;
-
         }
     }
 }

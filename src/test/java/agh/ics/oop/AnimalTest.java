@@ -51,7 +51,6 @@ public class AnimalTest {
 
         assertEquals(a.getPosition(), new Vector2d(4,0));
         assertEquals(a.getOrientation(),MapDirection.SOUTH);
-
     }
 
     @Test
@@ -69,7 +68,5 @@ public class AnimalTest {
 
         assertEquals(a.getPosition(),new Vector2d(3,3));
         assertEquals(a.getOrientation(),MapDirection.WEST);
-
-
     }
 }

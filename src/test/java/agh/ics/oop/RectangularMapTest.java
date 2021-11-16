@@ -3,11 +3,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RectangularMapTest {
+    int width = 10;
+    int height = 10;
+
 
     @Test
     public void testcanMoveTo(){
-        int width = 10;
-        int height = 10;
         IWorldMap map = new RectangularMap(width, height);
         assertTrue(map.canMoveTo(new Vector2d(5,5)));
         assertFalse(map.canMoveTo(new Vector2d(10,10)));
@@ -15,10 +16,9 @@ public class RectangularMapTest {
         assertFalse(map.canMoveTo(new Vector2d(11,12)));
     }
 
+
     @Test
     public void testPlace(){
-        int width = 10;
-        int height = 10;
         IWorldMap map = new RectangularMap(width, height);
         Animal newanimal1 = new Animal(map,new Vector2d(3,4));
         Animal newanimal2 = new Animal(map,new Vector2d(5,4));
@@ -32,10 +32,9 @@ public class RectangularMapTest {
         assertFalse(map.place(newanimal5));
     }
 
+
     @Test
     public void testisOccupied(){
-        int width = 10;
-        int height = 10;
         IWorldMap map = new RectangularMap(width, height);
         Animal newanimal1 = new Animal(map,new Vector2d(3,4));
         Animal newanimal2 = new Animal(map,new Vector2d(5,8));
@@ -47,10 +46,9 @@ public class RectangularMapTest {
         assertFalse(map.isOccupied(new Vector2d(9,7)));
     }
 
+
     @Test
     public void testobjectAt(){
-        int width = 10;
-        int height = 10;
         IWorldMap map = new RectangularMap(width, height);
         Animal newanimal1 = new Animal(map,new Vector2d(3,4));
         Animal newanimal2 = new Animal(map,new Vector2d(5,8));
