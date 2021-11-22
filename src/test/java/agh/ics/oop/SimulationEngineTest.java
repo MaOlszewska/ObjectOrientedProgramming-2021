@@ -1,10 +1,7 @@
 package agh.ics.oop;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class SimulationEngineTest {
@@ -19,13 +16,9 @@ public class SimulationEngineTest {
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4)};
         IEngine engine = new SimulationEngine(directions, map, positions);
         engine.run();
-        ArrayList<Animal> animals = map.getAnimals();
-        assertEquals(animals.get(1).getPosition(),new Vector2d(2,9));
-        assertEquals(animals.get(1).getOrientation(),MapDirection.NORTH);
-        assertEquals(animals.get(0).getPosition(),new Vector2d(3,0));
-        assertEquals(animals.get(0).getOrientation(), MapDirection.SOUTH);
 
-
+        assertTrue(map.objectAt(new Vector2d(2, 0)) instanceof Animal);
+        assertTrue(map.objectAt(new Vector2d(3, 7)) instanceof Animal);
     }
 
 }

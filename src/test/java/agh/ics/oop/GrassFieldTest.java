@@ -10,7 +10,7 @@ public class GrassFieldTest {
     Animal dog  = new Animal();
     Animal fly  = new Animal(map, new Vector2d(5,5));
     Animal worm = new Animal(map,new Vector2d(3,4));
-    Animal rabbit = new Animal(map, new Vector2d(2,2));
+
 
 
     @Test
@@ -60,7 +60,6 @@ public class GrassFieldTest {
 
     @Test
     public void testRun(){
-        ArrayList<Animal> animals;
         String[] moves = new String[]{"f",  "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
         MoveDirection[] directions = new OptionsParser().parse(moves);
         Vector2d[] positions = {dog.getPosition(), worm.getPosition()};
@@ -68,11 +67,8 @@ public class GrassFieldTest {
 
         engine.run();
 
-        animals = ((GrassField) map).getAnimal();
-        assertEquals(animals.get(0).getPosition(), new Vector2d(3,-1));
-        assertEquals(animals.get(1).getPosition(), new Vector2d(2,9));
-        assertEquals(animals.get(0).getOrientation(),MapDirection.SOUTH);
-        assertEquals(animals.get(1).getOrientation(), MapDirection.NORTH);
+        assertTrue(map.objectAt(new Vector2d(2, -1)) instanceof Animal);
+        assertTrue(map.objectAt(new Vector2d(3, 7)) instanceof Animal);
 
     }
 }

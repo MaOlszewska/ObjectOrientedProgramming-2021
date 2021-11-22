@@ -4,13 +4,17 @@ import java.util.Objects;
 
 class Vector2d {
 
-
-    final int x;
-    final int y;
+    public final int x;
+    public final int y;
 
     public Vector2d(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.x, this.y);
     }
 
     public String toString() {
@@ -54,4 +58,7 @@ class Vector2d {
     public Vector2d opposite() {
         return new Vector2d((-1) * this.x, (-1) * this.y);
     }
+
+
+
 }

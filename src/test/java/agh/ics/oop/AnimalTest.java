@@ -8,6 +8,7 @@ public class AnimalTest {
 
     @Test
     public void orientationTest(){
+
         Animal a = new Animal();
         String[] moves = new String[]{"l","forward","left","backward"};
         OptionsParser p = new OptionsParser();

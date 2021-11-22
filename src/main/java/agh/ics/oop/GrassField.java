@@ -1,25 +1,21 @@
 package agh.ics.oop;
-import org.w3c.dom.css.Rect;
 
-import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+
+
 public class GrassField extends AbstractWorldMap{
 
     private final int fieldNumber;
-    private final ArrayList<Grass> grasses;
+    private final LinkedHashMap<Vector2d, Grass> grass;
 
     public GrassField(int fieldNumber){
         this.fieldNumber = fieldNumber;
-        this.animals = new ArrayList<>();
-        this.grasses = new ArrayList<>();
-        this.mapVisualizer = new MapVisualizer(this);
+        this.grass = new LinkedHashMap<>();
         placeGrass();
     }
 
-    public ArrayList<Animal> getAnimal(){
-        return this.animals;
-    }
 
     private void placeGrass(){
         Random random = new Random();
@@ -32,11 +28,10 @@ public class GrassField extends AbstractWorldMap{
             }
             // instanceof -sprawdzam czy zwracany obiekt z danego pola jest trawą
             while(isOccupied(new Vector2d(x,y)) && (objectAt(new Vector2d(x,y)) instanceof Grass) ); // pozniej sprawdzany warunek, czyli wykona sie przynamnije raz
-
-            this.grasses.add(new Grass(new Vector2d(x,y))); // dodaje kępke do trawnika
+            Grass tuft = new Grass(new Vector2d(x,y));
+            this.grass.put(tuft.getPosition(), tuft); // dodaje kępke do trawnika
         }
     }
-
 
     @Override
     public boolean canMoveTo(Vector2d position) {
@@ -44,51 +39,41 @@ public class GrassField extends AbstractWorldMap{
         return  !isOccupied(position) || objectAt(position) instanceof Grass ;
     }
 
-
     @Override
     public Object objectAt(Vector2d position) {
-        for(Animal animal : animals){
-            if(animal.getPosition().equals(position)){
-                return animal;
-            }
+        Object object =  super.objectAt(position);
+        if (object == null){
+            return grass.get(position);
         }
-        for(Grass grass :grasses){
-            if(grass.getPosition().equals(position)){
-                return grass;
-            }
-        }
-        return null;
+        else return object;
     }
 
-
     public Vector2d getLeftCorner(){
-        Vector2d f = grasses.get(0).getPosition();
-        Vector2d s = grasses.get(1).getPosition();
-        Vector2d leftCorner = f.loweLeft(s);
+        Iterator<Vector2d> grassI = grass.keySet().iterator();
+        Iterator<Vector2d> animalI = animals.keySet().iterator();
+        Vector2d leftcorner = grassI.next().loweLeft(grassI.next());
 
-        for (int i = 2; i < grasses.size(); i++){
-            leftCorner = leftCorner.loweLeft(grasses.get(i).getPosition());
+        while(grassI.hasNext()){
+            leftcorner = leftcorner.loweLeft(grassI.next());
         }
-
-        for (Animal animal : animals){
-            leftCorner = leftCorner.loweLeft(animal.getPosition());
+        while(animalI.hasNext()){
+            leftcorner = leftcorner.loweLeft(animalI.next());
         }
-        return leftCorner;
+        return leftcorner;
     }
 
 
     public Vector2d getRightCorner(){
-        Vector2d f = grasses.get(0).getPosition();
-        Vector2d s = grasses.get(1).getPosition();
-        Vector2d rightCorner = f.upperRight(s);
+        Iterator<Vector2d> grassI = grass.keySet().iterator();  // keySet - zwraca klucze
+        Iterator<Vector2d> animalI = animals.keySet().iterator();
+        Vector2d rightcorner = grassI.next().upperRight(grassI.next());  //next(zwraca kolejny element iteracji
 
-        for (int i = 2; i < grasses.size(); i++){
-            rightCorner = rightCorner.upperRight(grasses.get(i).getPosition());
+        while(grassI.hasNext()){  //hasNext() przechdoiz na kolejny element
+            rightcorner = rightcorner.upperRight(grassI.next());
         }
-
-        for (Animal animal : animals){
-            rightCorner = rightCorner.upperRight(animal.getPosition());
+        while(animalI.hasNext()){
+            rightcorner = rightcorner.upperRight(animalI.next());
         }
-        return rightCorner;
+        return rightcorner;
     }
 }

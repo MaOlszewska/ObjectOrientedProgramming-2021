@@ -19,7 +19,7 @@ public class SimulationEngine implements IEngine{
         for(Vector2d position : this.positions){
             Animal newAnimal = new Animal(this.map, position);
             if (this.map.place(newAnimal)) {
-                animals.add(newAnimal);
+                animals.add( newAnimal);
             }
         }
     }
@@ -29,7 +29,7 @@ public class SimulationEngine implements IEngine{
         int l = animals.size();
         int i = 0;
 
-        for (MoveDirection direction: this.directions) {
+        for (MoveDirection direction: directions) {
             animals.get(i % l).move(direction);
             i ++;
         }
