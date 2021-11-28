@@ -1,7 +1,7 @@
 package agh.ics.oop;
 import java.util.ArrayList;
 
-public class Animal {
+public class Animal implements IMapElement {
     private Vector2d position;
     private MapDirection orientation;
     private IWorldMap map;
@@ -22,6 +22,7 @@ public class Animal {
     public Animal(IWorldMap map, Vector2d initialPosition){
         this(map);
         this.position = initialPosition;
+        this.orientation = MapDirection.NORTH;
     }
 
     public String toString(){
@@ -37,8 +38,11 @@ public class Animal {
         return this.orientation;
     }
 
-    public Vector2d getPosition() { return  this.position; }
 
+    @Override
+    public Vector2d getPosition() {
+        return this.position;
+    }
 
     void addObserver(IPositionChangeObserver observer){
         this.observers.add(observer);
@@ -77,6 +81,8 @@ public class Animal {
                     positionChange(oldPosition, newposition);
                 }
                 break;
+            default: ;
+
         }
     }
 }

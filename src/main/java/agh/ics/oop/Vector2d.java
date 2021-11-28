@@ -36,7 +36,7 @@ class Vector2d {
         return new Vector2d(Math.max(other.x, this.x), Math.max(other.y, this.y));
     }
 
-    public Vector2d loweLeft(Vector2d other) {
+    public Vector2d lowerLeft(Vector2d other) {
         return new Vector2d(Math.min(other.x, this.x), Math.min(other.y, this.y));
     }
 

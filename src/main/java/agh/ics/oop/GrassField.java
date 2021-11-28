@@ -29,6 +29,7 @@ public class GrassField extends AbstractWorldMap{
             // instanceof -sprawdzam czy zwracany obiekt z danego pola jest trawą
             while(isOccupied(new Vector2d(x,y)) && (objectAt(new Vector2d(x,y)) instanceof Grass) ); // pozniej sprawdzany warunek, czyli wykona sie przynamnije raz
             Grass tuft = new Grass(new Vector2d(x,y));
+            mapElements.add(tuft);
             this.grass.put(tuft.getPosition(), tuft); // dodaje kępke do trawnika
         }
     }
@@ -49,30 +50,20 @@ public class GrassField extends AbstractWorldMap{
     }
 
     public Vector2d getLeftCorner(){
-        Iterator<Vector2d> grassI = grass.keySet().iterator();
-        Iterator<Vector2d> animalI = animals.keySet().iterator();
-        Vector2d leftcorner = grassI.next().loweLeft(grassI.next());
+        Vector2d leftcorner = mapElements.get(0).getPosition();
 
-        while(grassI.hasNext()){
-            leftcorner = leftcorner.loweLeft(grassI.next());
-        }
-        while(animalI.hasNext()){
-            leftcorner = leftcorner.loweLeft(animalI.next());
+        for(IMapElement element : mapElements){
+            leftcorner = leftcorner.lowerLeft(element.getPosition());
         }
         return leftcorner;
     }
 
 
     public Vector2d getRightCorner(){
-        Iterator<Vector2d> grassI = grass.keySet().iterator();  // keySet - zwraca klucze
-        Iterator<Vector2d> animalI = animals.keySet().iterator();
-        Vector2d rightcorner = grassI.next().upperRight(grassI.next());  //next(zwraca kolejny element iteracji
+        Vector2d rightcorner = mapElements.get(0).getPosition();
 
-        while(grassI.hasNext()){  //hasNext() przechdoiz na kolejny element
-            rightcorner = rightcorner.upperRight(grassI.next());
-        }
-        while(animalI.hasNext()){
-            rightcorner = rightcorner.upperRight(animalI.next());
+        for(IMapElement element : mapElements){
+            rightcorner = rightcorner.upperRight(element.getPosition());
         }
         return rightcorner;
     }
