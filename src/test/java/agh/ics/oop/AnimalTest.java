@@ -8,8 +8,8 @@ public class AnimalTest {
 
     @Test
     public void orientationTest(){
-
-        Animal a = new Animal();
+        IWorldMap map = new RectangularMap(10, 10);
+        Animal a = new Animal(map, new Vector2d(2, 2));
         String[] moves = new String[]{"l","forward","left","backward"};
         OptionsParser p = new OptionsParser();
         for(MoveDirection move : p.parse(moves)){a.move(move);}
@@ -24,7 +24,8 @@ public class AnimalTest {
 
     @Test
     public void positionTest(){
-        Animal a = new Animal();
+        IWorldMap map = new RectangularMap(10, 10);
+        Animal a = new Animal(map, new Vector2d(2, 2));
         String[] moves = new String[]{"l", "f", "left", "b"};
         OptionsParser p = new OptionsParser();
         for(MoveDirection move : p.parse(moves)){a.move(move);}
@@ -39,7 +40,8 @@ public class AnimalTest {
 
     @Test
     public void mapTest(){
-        Animal a = new Animal();
+        IWorldMap map = new RectangularMap(5, 5);
+        Animal a = new Animal(map, new Vector2d(2, 2));
         String[] moves = new String[]{"f", "f", "f", "f", "f", "f", "f"};
         OptionsParser p = new OptionsParser();
         for(MoveDirection move : p.parse(moves)){a.move(move);}
@@ -56,7 +58,8 @@ public class AnimalTest {
 
     @Test
     public void interpretationTest(){
-        Animal a = new Animal();
+        IWorldMap map = new RectangularMap(10, 10);
+        Animal a = new Animal(map, new Vector2d(2, 2));
         String [] moves = new String[]{"f", "chomik", "right", "Kot", "left", "l", "pies", "backward", "Rybki"};
         OptionsParser p = new OptionsParser();
         for(MoveDirection move : p.parse(moves)){a.move(move);}
