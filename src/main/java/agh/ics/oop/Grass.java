@@ -13,7 +13,6 @@ public class Grass implements IMapElement {
         return grassPosition;
     }
 
-    public String toString(){
-        return "*";
-    }
+    public String toString() {return "*";}
+
 }

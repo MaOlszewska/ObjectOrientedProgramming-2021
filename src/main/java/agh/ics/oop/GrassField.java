@@ -1,6 +1,5 @@
 package agh.ics.oop;
 
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
@@ -29,8 +28,9 @@ public class GrassField extends AbstractWorldMap{
             // instanceof -sprawdzam czy zwracany obiekt z danego pola jest trawą
             while(isOccupied(new Vector2d(x,y)) && (objectAt(new Vector2d(x,y)) instanceof Grass) ); // pozniej sprawdzany warunek, czyli wykona sie przynamnije raz
             Grass tuft = new Grass(new Vector2d(x,y));
+            grass.put(tuft.getPosition(), tuft); // dodaje kępke do trawnika
             mapElements.add(tuft);
-            this.grass.put(tuft.getPosition(), tuft); // dodaje kępke do trawnika
+            boundary.addElements(tuft);
         }
     }
 
@@ -49,22 +49,7 @@ public class GrassField extends AbstractWorldMap{
         else return object;
     }
 
-    public Vector2d getLeftCorner(){
-        Vector2d leftcorner = mapElements.get(0).getPosition();
+    public Vector2d getLeftCorner(){return boundary.getLeftCorner();}
 
-        for(IMapElement element : mapElements){
-            leftcorner = leftcorner.lowerLeft(element.getPosition());
-        }
-        return leftcorner;
-    }
-
-
-    public Vector2d getRightCorner(){
-        Vector2d rightcorner = mapElements.get(0).getPosition();
-
-        for(IMapElement element : mapElements){
-            rightcorner = rightcorner.upperRight(element.getPosition());
-        }
-        return rightcorner;
-    }
+    public Vector2d getRightCorner(){return boundary.getRightCorner();}
 }

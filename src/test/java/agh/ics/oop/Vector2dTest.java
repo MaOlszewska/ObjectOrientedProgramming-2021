@@ -58,9 +58,9 @@ public class Vector2dTest {
         Vector2d v1 = new Vector2d(1,1);
         Vector2d v2 = new Vector2d(-4,5);
         Vector2d v3 = new Vector2d(10,3);
-        assertEquals(v1.loweLeft(v2), new Vector2d(-4,1));
-        assertEquals(v3.loweLeft(v2), new Vector2d(-4,3));
-        assertEquals(v1.loweLeft(v3), new Vector2d(1,1));
+        assertEquals(v1.lowerLeft(v2), new Vector2d(-4,1));
+        assertEquals(v3.lowerLeft(v2), new Vector2d(-4,3));
+        assertEquals(v1.lowerLeft(v3), new Vector2d(1,1));
     }
 
     @Test

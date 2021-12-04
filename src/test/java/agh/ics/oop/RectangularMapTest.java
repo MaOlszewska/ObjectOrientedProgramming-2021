@@ -28,8 +28,16 @@ public class RectangularMapTest {
         assertTrue(map.place(newanimal1));
         assertTrue(map.place(newanimal2));
         assertTrue(map.place(newanimal3));
-        assertFalse(map.place(newanimal4));
-        assertFalse(map.place(newanimal5));
+        try{
+            map.place(newanimal4);
+        }catch(IllegalArgumentException ex){
+            assertEquals(ex.getMessage(), "(3,4) Is taken or outside the map");
+        }
+        try{
+            map.place(newanimal5);
+        }catch(IllegalArgumentException ex){
+            assertEquals(ex.getMessage(), "(1,10) Is taken or outside the map");
+        }
     }
 
 

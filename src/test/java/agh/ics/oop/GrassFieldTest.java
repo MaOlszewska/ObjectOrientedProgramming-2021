@@ -1,7 +1,6 @@
 package agh.ics.oop;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.ArrayList;
 
 public class GrassFieldTest {
 
@@ -29,8 +28,16 @@ public class GrassFieldTest {
     public void testPlace(){
         assertTrue(map.place(cat));
         assertTrue(map.place(dog));
-        assertFalse(map.place(new Animal()));
-        assertFalse(map.place(new Animal(map, new Vector2d(1,1))));
+        try{
+            map.place(new Animal(map, new Vector2d(1,1)));
+        }catch(IllegalArgumentException ex){
+            assertEquals(ex.getMessage(), "(1,1) Is taken or outside the map");
+        }
+       try{
+           map.place(new Animal(map, new Vector2d(2,2)));
+       }catch(IllegalArgumentException ex){
+           assertEquals(ex.getMessage(),"(2,2) Is taken or outside the map");
+       }
     }
 
     @Test

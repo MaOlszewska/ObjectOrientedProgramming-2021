@@ -58,19 +58,24 @@ public class AnimalTest {
 
     @Test
     public void interpretationTest(){
-        IWorldMap map = new RectangularMap(10, 10);
-        Animal a = new Animal(map, new Vector2d(2, 2));
-        String [] moves = new String[]{"f", "chomik", "right", "Kot", "left", "l", "pies", "backward", "Rybki"};
-        OptionsParser p = new OptionsParser();
-        for(MoveDirection move : p.parse(moves)){a.move(move);}
+        try{
+            IWorldMap map = new RectangularMap(10, 10);
+            Animal a = new Animal(map, new Vector2d(2, 2));
+            String [] moves = new String[]{"f", "right", "Kot", "left", "l", "pies", "backward"};
+            OptionsParser p = new OptionsParser();
+            for(MoveDirection move : p.parse(moves)){a.move(move);}
+        }catch(IllegalArgumentException ex){
+            assertEquals(ex.getMessage(),"Kot is not legal move specification");
+        }
 
-        assertEquals(a.getPosition(),new Vector2d(3,3));
-        assertEquals(a.getOrientation(),MapDirection.WEST);
-
-        String [] moves1 = new String[]{"chomik", "Kot", "pies", "Rybki", "szynszyl"};
-        for(MoveDirection move : p.parse(moves1)){a.move(move);}
-
-        assertEquals(a.getPosition(),new Vector2d(3,3));
-        assertEquals(a.getOrientation(),MapDirection.WEST);
+        try{
+            IWorldMap map = new RectangularMap(10, 10);
+            Animal a = new Animal(map, new Vector2d(2, 2));
+            String [] moves = new String[]{"f", "right", "left", "l", "backward","F"};
+            OptionsParser p = new OptionsParser();
+            for(MoveDirection move : p.parse(moves)){a.move(move);}
+        }catch(IllegalArgumentException ex){
+            assertEquals(ex.getMessage(),"F is not legal move specification");
+        }
     }
 }
