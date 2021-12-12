@@ -2,20 +2,26 @@ package agh.ics.oop;
 import java.util.ArrayList;
 
 
-public class OptionsParser {
-    public MoveDirection[] parse(String[] moves){
-        int len = moves.length;
+public class OptionsParser{
+
+    public static MoveDirection[] parse(Object[] list) {
+        int len = list.length;
         MoveDirection[] result = new MoveDirection[len];
-        int i = 0;
-        for(String move : moves){
-            result[i] = switch (move){
-                case "f", "forward" -> MoveDirection.FORWARD;
-                case "b", "backward" -> MoveDirection.BACKWARD;
-                case "l", "left" -> MoveDirection.LEFT;
-                case "r", "right" -> MoveDirection.RIGHT;
-                default -> throw new IllegalArgumentException( move + " is not legal move specification");
-            };
-            i ++;
+        int i =0;
+        for(Object element : list){
+            if ("f".equals(element) || "forward".equals(element)) {
+                result[i] = (MoveDirection.FORWARD);
+            } else if ("b".equals(element) || "backward".equals(element)) {
+                result[i] = (MoveDirection.BACKWARD);
+            } else if ("l".equals(element) || "left".equals(element)) {
+                result[i] = (MoveDirection.LEFT);
+            } else if ("r".equals(element) || "right".equals(element)) {
+                result[i] = (MoveDirection.RIGHT);
+            } else {
+                i -= 1;
+                throw new IllegalArgumentException(element + " is not legal move specification");
+            }
+            i+=1;
         }
         return result;
     }

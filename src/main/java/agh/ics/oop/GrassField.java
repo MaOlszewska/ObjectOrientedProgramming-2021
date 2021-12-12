@@ -30,7 +30,7 @@ public class GrassField extends AbstractWorldMap{
             Grass tuft = new Grass(new Vector2d(x,y));
             grass.put(tuft.getPosition(), tuft); // dodaje kępke do trawnika
             mapElements.add(tuft);
-            boundary.addElements(tuft);
+            boundary.addElements(   tuft);
         }
     }
 

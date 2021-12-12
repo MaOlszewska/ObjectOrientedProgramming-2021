@@ -65,17 +65,17 @@ public class GrassFieldTest {
         assertEquals(map.objectAt(new Vector2d(1,1)), cat);
     }
 
-    @Test
-    public void testRun(){
-        String[] moves = new String[]{"f",  "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
-        MoveDirection[] directions = new OptionsParser().parse(moves);
-        Vector2d[] positions = {dog.getPosition(), worm.getPosition()};
-        IEngine engine = new SimulationEngine(directions, map, positions);
-
-        engine.run();
-
-        assertTrue(map.objectAt(new Vector2d(2, -1)) instanceof Animal);
-        assertTrue(map.objectAt(new Vector2d(3, 7)) instanceof Animal);
-
-    }
+//    @Test
+//    public void testRun(){
+//        String[] moves = new String[]{"f",  "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
+//        MoveDirection[] directions = new OptionsParser().parse(moves);
+//        Vector2d[] positions = {dog.getPosition(), worm.getPosition()};
+//        IEngine engine = new SimulationEngine(directions, map, positions);
+//
+//        engine.run();
+//
+//        assertTrue(map.objectAt(new Vector2d(2, -1)) instanceof Animal);
+//        assertTrue(map.objectAt(new Vector2d(3, 7)) instanceof Animal);
+//
+//    }
 }

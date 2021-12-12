@@ -7,7 +7,6 @@ public class Animal implements IMapElement {
     private IWorldMap map;
     private ArrayList<IPositionChangeObserver> observers;
 
-
     public Animal(){
         this.orientation = MapDirection.NORTH;
         this.position = new Vector2d(2, 2);
@@ -47,6 +46,7 @@ public class Animal implements IMapElement {
     void addObserver(IPositionChangeObserver observer){
         this.observers.add(observer);
     }
+
     void removeObserver (IPositionChangeObserver observer){
         this.observers.remove(observer);
     }
@@ -82,7 +82,19 @@ public class Animal implements IMapElement {
                 }
                 break;
             default: ;
+        }
+    }
 
+    @Override
+    public String getPath(IMapElement object) {
+        Animal animal = (Animal) object;
+        MapDirection orientation = animal.orientation;
+        switch (orientation) {
+            case NORTH -> {return "src/main/resources/North.png";}
+            case EAST -> {return "src/main/resources/East.png";}
+            case SOUTH -> {return "src/main/resources/South.png";}
+            case WEST -> {return "src/main/resources/WEST.png";}
+            default -> {return "src/main/resources/WEST.png";}
         }
     }
 }
